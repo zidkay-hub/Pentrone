@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import ServiceArt from '../components/ServiceArt.astro';
+import { services } from '../data/site.js';
+const slug = (t) => t.toLowerCase().replace(/[^a-z]+/g, '-');
+---
+<Base title="Services — Pentrone" description="Web development, mobile app development, bug fixing, SEO, speed optimization, digital marketing, security and content marketing from Pentrone." current="services">
+  <PageHero eyebrow="Services" title="Everything your brand needs to grow online" lead="Websites, mobile apps, bug fixing, SEO, marketing and more, all from one team." />
+
+  <div class="sheet">
+    <section class="svc">
+      <aside class="svc-nav" aria-label="Services">
+        <span class="sec-eyebrow" style="text-align:left">Jump to</span>
+        <ul>
+          {services.map((s) => <li><a href={`#${slug(s.t)}`} data-svc={slug(s.t)}><b>{s.n}</b>{s.t}</a></li>)}
+        </ul>
+      </aside>
+      <div class="svc-list">
+        {services.map((s, i) => (
+          <article class={`svc-block ${s.c}`} id={slug(s.t)} data-svc-block={slug(s.t)}>
+            <div class="svc-art" data-speed="0.2" style={`--rot:${i % 2 ? -6 : 6}deg`}><ServiceArt c={s.c} /></div>
+            <header>
+              <span class="svc-n">{s.n}</span>
+              <h2 class="rvw" data-words>{s.t}</h2>
+            </header>
+            <p data-rv>{s.p}</p>
+            <ul class="svc-feats" data-rv>{s.l.map((x) => <li>{x}</li>)}</ul>
+            <a class="svc-link" href="/contact/" data-rv>Ask about {s.t.toLowerCase()} <span>→</span></a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <Faq />
+  <CtaBanner title="Not sure what you need?" sub="Describe the problem and we will recommend the simplest way to solve it." />
+</Base>

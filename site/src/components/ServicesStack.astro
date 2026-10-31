@@ -1,0 +1,20 @@
+---
+import { services } from '../data/site.js';
+import ServiceArt from './ServiceArt.astro';
+---
+<section class="services" id="services">
+  <span class="sec-eyebrow" data-rv>What we do</span>
+  <h2 class="sec-title rvw" data-words>Our Services</h2>
+  <div class="stack" id="stack">
+    {services.map((s, i) => (
+      <article class={`scard ${s.c}`} style={`--i:${i}; --r:${i % 2 ? 0.9 : -0.9}deg`}>
+        <div class="num"><b>{s.n}</b>{s.t}</div>
+        <div class="txt"><p>{s.p}</p></div>
+        <ul>{s.l.map((x) => <li>{x}</li>)}</ul>
+        <div class="float" data-speed="0.35" style={`--rot:${i % 2 ? -7 : 7}deg`}>
+          <ServiceArt c={s.c} />
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

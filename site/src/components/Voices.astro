@@ -1,0 +1,21 @@
+---
+import { voices, FIVERR } from '../data/site.js';
+const { title = 'Clients who grew with us' } = Astro.props;
+---
+<section class="voices" id="voices">
+  <span class="sec-eyebrow" data-rv>Kind words</span>
+  <h2 class="sec-title rvw" data-words>{title}</h2>
+  <div class="vgrid">
+    {voices.map((v, i) => (
+      <figure class="vcard" data-speed={[0.25, -0.2, 0.3][i]}>
+        <div class="stars">★★★★★</div>
+        <span class="q">“</span>
+        <p>{v.q}</p>
+        <figcaption class="who"><i>{v.n[0]}</i><div>{v.n}<span>{v.r}</span></div></figcaption>
+      </figure>
+    ))}
+  </div>
+  <div class="fv-row" data-rv>
+    <a class="btn dark lg" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> Read our reviews on Fiverr <span class="arr">→</span></a>
+  </div>
+</section>

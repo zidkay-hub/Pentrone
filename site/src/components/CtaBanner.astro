@@ -1,0 +1,15 @@
+---
+import { FIVERR } from '../data/site.js';
+const { title = 'Let’s build something great', sub = 'Tell us about your project and get a clear plan and a fair quote within one working day.' } = Astro.props;
+---
+<section class="banner">
+  <div class="banner-in">
+    <canvas data-spray="c" aria-hidden="true"></canvas>
+    <h2 class="rvw" data-words>{title}</h2>
+    <p data-rv>{sub}</p>
+    <div class="banner-btns" data-rv>
+      <a class="btn dark lg" data-magnetic href="/contact/">Get a free quote <span class="arr">→</span></a>
+      <a class="btn lg" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> Hire us on Fiverr</a>
+    </div>
+  </div>
+</section>

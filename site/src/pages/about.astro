@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import AboutArt from '../components/AboutArt.astro';
+import { FIVERR, fiverrStats as f, chapters, pillars, tools } from '../data/site.js';
+const row = [...tools, ...tools];
+---
+<Base title="About — Pentrone" description="Meet Pentrone, an Abu Dhabi digital agency building websites, mobile apps, SEO and marketing for brands worldwide." current="about">
+  <PageHero eyebrow="About us" title="A small team with big digital ambitions" lead="We are designers, developers and marketers who care about one thing: making your brand impossible to ignore online." />
+
+  <div class="sheet">
+    <!-- story: chapters -->
+    <section class="chapters">
+      <div class="chap-head">
+        <span class="sec-eyebrow" style="text-align:left" data-rv>Our story</span>
+        <h2 class="rvw" data-words>How Pentrone grew from an idea to a full digital team</h2>
+        <a class="fv-line" data-rv href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b><span>Rated <strong>{f.rating}</strong> by <strong>{f.reviews}</strong> clients on Fiverr</span><i>↗</i></a>
+      </div>
+      <div class="chap-list">
+        {chapters.map((c, i) => (
+          <article class="chap" data-rv>
+            <span class="chap-n" data-speed="0.1">{c.n}</span>
+            <div><h3>{c.t}</h3><p>{c.p}</p></div>
+            <i class={`chap-art ca${i + 1}`} data-speed={i % 2 ? -0.2 : 0.2}><AboutArt kind={['idea', 'team', 'clients', 'today'][i]} /></i>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- pillars -->
+    <section class="pillars-sec">
+      <span class="sec-eyebrow" data-rv>What we stand for</span>
+      <h2 class="sec-title rvw" data-words>Four ideas behind every project</h2>
+      <div class="pillars">
+        {pillars.map((p, i) => (
+          <article class={`pillar ${p.c}`}>
+            <span class="pn">0{i + 1}</span>
+            <div class="pillar-art"><AboutArt kind={p.t.toLowerCase()} /></div>
+            <h3>{p.t}</h3>
+            <p>{p.p}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <!-- tool belt -->
+  <section class="toolbelt" aria-label="Tools and platforms">
+    <span class="sec-eyebrow" data-rv>Our toolkit</span>
+    <div class="chiprow" data-marquee="-1">{row.map((t) => <span>{t}</span>)}</div>
+    <div class="chiprow alt" data-marquee="1">{row.slice().reverse().map((t) => <span>{t}</span>)}</div>
+  </section>
+
+  <CtaBanner title="Let’s work together" sub="Direct or through Fiverr, you get the same senior attention, clear updates and results you can measure." />
+</Base>

@@ -1,0 +1,28 @@
+---
+import { FIVERR, fiverrStats as f } from '../data/site.js';
+---
+<section class="fvp" id="fiverr">
+  <div class="fvp-card">
+    <span class="fvp-water" aria-hidden="true">fiverr<i>.</i></span>
+    <div class="fvp-main">
+      <div class="fvp-badge" data-rv>
+        <span class="fvw">fiverr<i>.</i></span>
+        <span class="fvp-lv"><b>{f.level}</b> <span class="stars">★★★★★</span> {f.rating}</span>
+      </div>
+      <span class="sec-eyebrow" style="text-align:left;color:var(--green)" data-rv>Proven on Fiverr</span>
+      <h2 class="rvw" data-words>Rated {f.rating} by hundreds of happy clients</h2>
+      <p data-rv>Our Fiverr profile is where the work speaks loudest. Every review is from a real client, and every project is delivered with the same care, whether you hire us directly or through Fiverr.</p>
+      <div class="fvp-chips" data-rv>{f.skills.map((s) => <i>{s}</i>)}</div>
+      <a class="btn primary lg" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> See our reviews <span class="arr">→</span></a>
+    </div>
+    <div class="fvp-side">
+      <div class="fvp-big" data-rv><b>{f.rating}</b><div><span class="stars">★★★★★</span><small>average rating</small></div></div>
+      <div class="fvp-grid" data-rv>
+        <div><b><span data-count={f.reviews}>0</span></b><small>client reviews</small></div>
+        <div><b>{f.level}</b><small>Fiverr seller</small></div>
+        <div><b>~{f.response}</b><small>avg response</small></div>
+      </div>
+      <blockquote data-rv>“{f.quote}”<cite>{f.quoteBy}</cite></blockquote>
+    </div>
+  </div>
+</section>

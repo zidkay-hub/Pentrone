@@ -1,0 +1,23 @@
+---
+import { steps } from '../data/site.js';
+---
+<section class="process" id="process">
+  <div class="proc-wrap">
+    <div class="proc-left">
+      <span class="sec-eyebrow" data-rv>How we work</span>
+      <h2 class="rvw" data-words>From first call to first place</h2>
+      <p data-rv>A simple, transparent process with no surprises. You always know what is happening and what comes next.</p>
+      <a class="btn dark" data-magnetic href="/contact/">Book a free call <span class="arr">→</span></a>
+    </div>
+    <div class="proc-line" id="procLine">
+      <span class="fill" id="procFill"></span>
+      {steps.map((s, i) => (
+        <div class="step">
+          <span class="no" data-speed="0.08">0{i + 1}</span>
+          <h3>{s.t}</h3>
+          <p>{s.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

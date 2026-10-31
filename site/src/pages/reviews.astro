@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import FiverrProof from '../components/FiverrProof.astro';
+import { FIVERR, fiverrStats as f, wall } from '../data/site.js';
+const shown = wall.slice(0, 4);
+---
+<Base title="Reviews — Pentrone" description="Read what Pentrone clients say about working with us, and see our 4.9-rated profile on Fiverr." current="reviews">
+  <PageHero eyebrow="Reviews" title="Don't take our word for it" lead="Hear from clients we have helped grow, and read verified reviews on our Fiverr profile." />
+
+  <div class="sheet">
+    <FiverrProof />
+
+    <section class="wall-sec">
+      <span class="sec-eyebrow" data-rv>The review wall</span>
+      <h2 class="sec-title rvw" data-words>What clients say</h2>
+      <div class="wall">
+        {shown.map((w) => (
+          <figure class={`wq ${w.src === 'Fiverr' ? 'is-fv' : ''}`} data-rv>
+            <div class="wq-top"><span class="stars">★★★★★</span><em>{w.src}</em></div>
+            <blockquote>“{w.q}”</blockquote>
+            <figcaption><i>{w.n[0]}</i><div>{w.n}<span>{w.r}</span></div></figcaption>
+          </figure>
+        ))}
+        {shown.length < 4 && (
+          <a class="wq wq-more" data-rv href={FIVERR} target="_blank" rel="noopener">
+            <span class="fvw">fiverr<i>.</i></span>
+            <b>{f.reviews}+ more reviews</b>
+            <small>Every one from a real client</small>
+            <span class="btn primary">View all reviews <span class="arr">→</span></span>
+          </a>
+        )}
+      </div>
+      {shown.length >= 4 && (
+        <div class="wall-cta" data-rv><a class="btn primary lg" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> View all reviews <span class="arr">→</span></a></div>
+      )}
+    </section>
+  </div>
+
+  <CtaBanner title="Become our next success story" sub="Work with a team that is rated 4.9 by hundreds of clients." />
+</Base>

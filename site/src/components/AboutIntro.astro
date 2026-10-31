@@ -1,0 +1,33 @@
+---
+import { FIVERR, fiverrStats } from '../data/site.js';
+---
+<section class="panel about" id="about">
+  <div class="about-grid">
+    <div class="about-txt">
+      <span class="sec-eyebrow" style="text-align:left" data-rv>About Pentrone</span>
+      <h2 class="rvw" data-words>A digital agency that treats your growth like our own</h2>
+      <p data-rv>Pentrone is a team of experts in web and mobile app development, SEO and digital marketing, based in Abu Dhabi and working with brands worldwide. We design, build, fix and grow, so you can focus on running your business.</p>
+      <a class="fv-line" data-rv href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b><span>Rated <strong>{fiverrStats.rating}</strong> by <strong>{fiverrStats.reviews}</strong> clients on Fiverr</span><i>↗</i></a>
+      <ul class="about-pts" data-rv>
+        <li><b>120+</b> projects delivered</li>
+        <li><b>350+</b> happy clients</li>
+        <li><b>24/7</b> support</li>
+      </ul>
+      <div class="about-cta" data-rv>
+        <a class="btn dark" data-magnetic href="/about/">More about us <span class="arr">→</span></a>
+        <a class="btn" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> Find us on Fiverr</a>
+      </div>
+    </div>
+    <div class="orb">
+      <div class="orb-card">
+        <i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i>
+        <img class="orb-globe" src="/img/mark-globe.png" alt="" aria-hidden="true" />
+        <img class="orb-logo" src="/img/logo.png" alt="Pentrone" />
+        <span class="orb-tag">Websites · Apps · SEO · Growth</span>
+      </div>
+      <div class="badge b-a" data-speed="0.3"><b>8</b> services</div>
+      <div class="badge b-b" data-speed="-0.25"><i class="dot"></i> Abu Dhabi · Worldwide</div>
+      <a class="badge b-c" data-speed="0.2" href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> {fiverrStats.rating} ★ · {fiverrStats.reviews} reviews</a>
+    </div>
+  </div>
+</section>

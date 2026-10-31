@@ -1,0 +1,26 @@
+---
+import { work } from '../data/site.js';
+---
+<section class="panel work" id="work">
+  <div class="panel-head">
+    <h2 class="rvw" data-words>Our <span class="ic"><img src="/img/mark-globe.png" alt="" /></span> work<br />speaks for itself</h2>
+    <p data-rv>We partner with ambitious businesses to craft bold identities, high-performing websites and growth that shows up in the numbers.</p>
+  </div>
+  <div class="hscroll" id="hscroll">
+    <div class="track" id="track">
+      {work.map((w) => (
+        <a class="wcard" href={w.url} target="_blank" rel="noopener">
+          <div class="im"><img src={`/img/${w.img}`} alt={`${w.t} website`} loading="lazy" decoding="async" /></div>
+          <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="#06201a" /></svg></span>
+          <span class="tag">{w.t}<small>{w.s}</small></span>
+        </a>
+      ))}
+      <a class="wcard end" href="/work/">
+        <div>
+          <h3>See every <em>project</em></h3>
+          <span class="btn primary">View all work <span class="arr">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

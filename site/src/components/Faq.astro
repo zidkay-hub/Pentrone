@@ -1,0 +1,25 @@
+---
+import { faqs, FIVERR } from '../data/site.js';
+---
+<section class="faq">
+  <div class="faq-wrap">
+    <aside class="faq-side" data-rv>
+      <img class="faq-mark" src="/img/mark-globe.png" alt="" aria-hidden="true" />
+      <span class="sec-eyebrow" style="text-align:left;color:var(--green)">Good to know</span>
+      <h2>Questions, answered</h2>
+      <p>Everything you might want to know before we start. Can't find your answer? Ask us directly, we reply fast.</p>
+      <div class="faq-btns">
+        <a class="btn primary" data-magnetic href="mailto:info@pentrone.org">Email us <span class="arr">→</span></a>
+        <a class="btn faq-fv" data-magnetic href={FIVERR} target="_blank" rel="noopener"><b class="fv-mark">fiverr</b> Message us</a>
+      </div>
+    </aside>
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <details data-rv {...(i === 0 ? { open: true } : {})}>
+          <summary><span class="fq-n">0{i + 1}</span><span class="fq-q">{f.q}</span><i></i></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

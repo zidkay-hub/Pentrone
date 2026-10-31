@@ -1,0 +1,13 @@
+---
+const { eyebrow, title, lead } = Astro.props;
+---
+<section class="phero">
+  <canvas class="spray" data-spray="a" aria-hidden="true"></canvas>
+  <canvas class="spray" data-spray="b" aria-hidden="true"></canvas>
+  <div class="phero-in">
+    <span class="sec-eyebrow" data-rv>{eyebrow}</span>
+    <h1 class="rvw" data-words>{title}</h1>
+    {lead && <p data-rv>{lead}</p>}
+    <slot />
+  </div>
+</section>

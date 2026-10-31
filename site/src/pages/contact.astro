@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import { FIVERR, fiverrStats as f, services } from '../data/site.js';
+const budgets = ['Under $500', '$500 – $2k', '$2k – $5k', '$5k+', 'Not sure yet'];
+---
+<Base title="Contact — Pentrone" description="Get a free quote from Pentrone. Tell us about your website, app or marketing project and hear back within one working day." current="contact">
+  <PageHero eyebrow="Contact" title="Let's build something great together" lead="Tell us what you need. You'll get a clear plan, a fair quote and a reply within one working day." />
+
+  <div class="sheet">
+    <section class="channels">
+      <a class="chan ch1" data-rv href="mailto:info@pentrone.org">
+        <span class="chan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M4 7l8 6 8-6" /></svg></span>
+        <small>Email us</small><b>info@pentrone.org</b><i>↗</i>
+      </a>
+      <a class="chan ch2" data-rv href="tel:+971543700840">
+        <span class="chan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg></span>
+        <small>Call us</small><b>+971 54 370 0840</b><i>↗</i>
+      </a>
+      <a class="chan ch3" data-rv href={FIVERR} target="_blank" rel="noopener">
+        <span class="chan-ic fvic"><b class="fv-mark">fiverr</b></span>
+        <small>Hire us on Fiverr</small><b>{f.rating} ★ · {f.reviews} reviews</b><i>↗</i>
+      </a>
+    </section>
+
+    <section class="getin">
+      <div class="getin-card">
+        <aside class="getin-side">
+          <span class="sec-eyebrow" style="text-align:left;color:var(--green)">Start a project</span>
+          <h2 class="rvw" data-words>Tell us about your project</h2>
+          <ol class="timeline">
+            <li><b>1</b><div><h3>We read your brief</h3><p>A real person reviews it, not a bot.</p></div></li>
+            <li><b>2</b><div><h3>You get a plan and quote</h3><p>Clear scope, timeline and a fixed price.</p></div></li>
+            <li><b>3</b><div><h3>We start building</h3><p>Regular updates until launch and beyond.</p></div></li>
+          </ol>
+          <div class="studio">
+            <svg viewBox="0 0 300 120" aria-hidden="true">
+              <defs><pattern id="mg" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="rgba(255,255,255,.08)" /></pattern></defs>
+              <rect width="300" height="120" fill="url(#mg)" />
+              <path d="M0 84C60 70 90 100 150 78s110-30 150-6" fill="none" stroke="rgba(34,232,131,.35)" stroke-width="2" />
+              <circle class="pulse" cx="170" cy="60" r="10" fill="none" stroke="#22e883" />
+              <circle class="pulse p2" cx="170" cy="60" r="10" fill="none" stroke="#22e883" />
+              <circle cx="170" cy="60" r="6" fill="#22e883" />
+            </svg>
+            <div><b>Abu Dhabi, UAE</b><small>Working with clients worldwide</small></div>
+          </div>
+        </aside>
+
+        <form class="form pane" id="form" data-rv>
+          <div class="two">
+            <label>Name<input name="name" required placeholder="Jane Doe" /></label>
+            <label>Email<input name="email" type="email" required placeholder="jane@company.com" /></label>
+          </div>
+          <fieldset>
+            <legend>I need help with</legend>
+            <div class="chips">
+              {[...services.map((s) => s.t), 'Not sure yet'].map((t, i) => (
+                <label><input type="radio" name="service" value={t} checked={i === 0} /><span>{t}</span></label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Budget (optional)</legend>
+            <div class="chips">
+              {budgets.map((t) => <label><input type="radio" name="budget" value={t} /><span>{t}</span></label>)}
+            </div>
+          </fieldset>
+          <label>Project details<textarea name="msg" placeholder="Goals, timeline, links…"></textarea></label>
+          <button class="btn dark lg" type="submit" data-magnetic>Send my request <span class="arr">→</span></button>
+          <p class="note">No spam, ever. We reply within one working day.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <Faq />
+</Base>

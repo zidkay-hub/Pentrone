@@ -1,6 +1,10 @@
 ---
 import '../styles/global.css';
-const { title, description } = Astro.props;
+import '../styles/pages.css';
+import '../styles/inner.css';
+import { nav, FIVERR } from '../data/site.js';
+const { title, description, current = '' } = Astro.props;
+const path = (h) => h.replace(/\//g, '');
 ---
 <!doctype html>
 <html lang="en">
@@ -16,7 +20,45 @@ const { title, description } = Astro.props;
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <slot />
+    <div class="progress" id="progress"></div>
+    <div class="cursor" id="cursor"></div>
+
+    <header class="nav" id="nav">
+      <nav class="nav-side l" aria-label="Primary">
+        {nav.map((n) => <a class={`link${current === path(n.href) ? ' on' : ''}`} href={n.href}>{n.label}</a>)}
+      </nav>
+      <a class="brand" href="/" aria-label="Pentrone home"><img src="/img/logo.png" alt="Pentrone" width="110" height="26" /></a>
+      <nav class="nav-side r" aria-label="Secondary">
+        <a class="btn primary" data-magnetic href="/contact/">Get a quote <span class="arr">→</span></a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+      </nav>
+    </header>
+
+    <div class="menu" id="menu" aria-hidden="true">
+      <nav>
+        <a href="/">Home</a>
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <a class="fv" href={FIVERR} target="_blank" rel="noopener">Hire us on Fiverr ↗</a>
+      </nav>
+    </div>
+
+    <main id="top">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="f-top">
+        <div class="f-logo"><img src="/img/logo.png" alt="Pentrone" /><p>A digital agency building websites, apps, search visibility and marketing that help brands stand out and grow.</p>
+          <a class="fiverr-pill" href={FIVERR} target="_blank" rel="noopener"><b>Fiverr</b> Hire us on Fiverr ↗</a>
+        </div>
+        <div><h4>Services</h4><ul><li><a href="/services/">Web Development</a></li><li><a href="/services/">Mobile Apps</a></li><li><a href="/services/">Bug Fixing</a></li><li><a href="/services/">SEO & Marketing</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="/about/">About</a></li><li><a href="/work/">Work</a></li><li><a href="/reviews/">Reviews</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+        <div><h4>Say hello</h4><ul><li><a href="mailto:info@pentrone.org">info@pentrone.org</a></li><li><a href="tel:+971543700840">+971 54 370 0840</a></li><li><a href="https://linkedin.com/company/pentrone" target="_blank" rel="noopener">LinkedIn</a></li><li><a href={FIVERR} target="_blank" rel="noopener">Fiverr</a></li></ul></div>
+      </div>
+      <div class="f-giant"><img src="/img/logo.png" alt="" aria-hidden="true" id="giantLogo" /></div>
+      <div class="f-bottom"><span>© 2026 Pentrone. All rights reserved.</span><span>Abu Dhabi · UAE</span></div>
+    </footer>
+
     <script>
       import '../scripts/main.js';
     </script>

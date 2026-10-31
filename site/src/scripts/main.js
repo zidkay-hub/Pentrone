@@ -90,11 +90,10 @@ const CTA = [
   { pts: [[-0.05, 0.06], [0.1, 0.2], [0.3, 0.04]], w: 0.035, color: '#22e883', density: 1.1 },
 ];
 
-const sprayA = $('#sprayA'), sprayB = $('#sprayB'), sprayC = $('#sprayC');
+const sprays = $$('canvas[data-spray]');
+const SETS = { a: [HERO_A, 11], b: [HERO_B, 23], c: [CTA, 41] };
 function paintAll() {
-  drawSpray(sprayA, HERO_A, 11);
-  drawSpray(sprayB, HERO_B, 23);
-  drawSpray(sprayC, CTA, 41);
+  sprays.forEach((cv) => { const [set, seed] = SETS[cv.dataset.spray]; drawSpray(cv, set, seed); });
 }
 paintAll();
 let lastW = innerWidth;
@@ -109,9 +108,32 @@ addEventListener('resize', () => {
 $('#form')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const f = new FormData(e.target);
-  const body = `Hi Pentrone,\n\n${f.get('msg') || ''}\n\nService: ${f.get('service')}\nName: ${f.get('name')}\nEmail: ${f.get('email')}`;
+  const body = `Hi Pentrone,\n\n${f.get('msg') || ''}\n\nService: ${f.get('service')}\nBudget: ${f.get('budget') || 'Not specified'}\nName: ${f.get('name')}\nEmail: ${f.get('email')}`;
   location.href = `mailto:info@pentrone.org?subject=${encodeURIComponent('Project enquiry from ' + f.get('name'))}&body=${encodeURIComponent(body)}`;
 });
+
+/* work filters */
+$$('.filters button').forEach((b) =>
+  b.addEventListener('click', () => {
+    $$('.filters button').forEach((x) => x.classList.toggle('on', x === b));
+    const f = b.dataset.filter;
+    $$('.case').forEach((cs) => cs.classList.toggle('hide', f !== 'All' && cs.dataset.cat !== f));
+    ScrollTrigger.refresh();
+  })
+);
+
+/* mobile menu */
+const burger = $('#burger'), menu = $('#menu');
+const setMenu = (open) => {
+  menu?.classList.toggle('open', open);
+  burger?.classList.toggle('open', open);
+  burger?.setAttribute('aria-expanded', String(open));
+  menu?.setAttribute('aria-hidden', String(!open));
+  document.documentElement.classList.toggle('menu-open', open);
+};
+burger?.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+$$('#menu a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
 
 if (reduce) {
   document.documentElement.classList.add('no-anim');
@@ -135,7 +157,7 @@ function init() {
       const t = $(id);
       if (!t) return;
       e.preventDefault();
-      lenis.scrollTo(t, { offset: id === '#work' ? -60 : 0, duration: 1.6 });
+      lenis.scrollTo(t, { offset: id === '#work' ? -60 : $('.svc-nav') ? -100 : 0, duration: 1.6 });
     })
   );
 
@@ -165,7 +187,18 @@ function init() {
     });
   }
 
+  gsap.from('#nav > *', { opacity: 0, duration: 1, stagger: 0.1, delay: 0.4, clearProps: 'opacity' });
+
+  /* inner-page hero */
+  if ($('.phero')) {
+    gsap.from('.phero .spray', { opacity: 0, duration: 2, ease: 'expo.out' });
+    $$('.phero .spray').forEach((cv, i) =>
+      gsap.fromTo(cv, { yPercent: 0 }, { yPercent: i ? -14 : 12, ease: 'none', scrollTrigger: { trigger: '.phero', start: 'top top', end: 'bottom top', scrub: true } })
+    );
+  }
+
   /* ───── hero intro ───── */
+  if ($('#hero')) {
   const chips = $$('[data-chip]');
   const rot = [-6, 7, -4];
   gsap.set(chips, { rotate: (i) => rot[i] });
@@ -175,7 +208,6 @@ function init() {
     .from('#heroTitle .line > span', { yPercent: 120, rotate: 4, duration: 1.4, stagger: 0.14 }, 0.2)
     .from(chips, { scale: 0, rotate: (i) => rot[i] + 40, duration: 1.3, stagger: 0.14, ease: 'elastic.out(1,.55)' }, 0.9)
     .from('[data-hero-in]', { y: 40, opacity: 0, duration: 1.1, stagger: 0.12, clearProps: 'opacity,transform' }, 1.0)
-    .from('#nav > *', { opacity: 0, duration: 1, stagger: 0.1, clearProps: 'opacity' }, 0.5)
     .add(() => $$('#heroTitle .line').forEach((l) => (l.style.overflow = 'visible')), 2.2);
 
   chips.forEach((c, i) => gsap.to(c, { y: i % 2 ? 8 : -8, duration: 2.2 + i * 0.4, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
@@ -197,6 +229,8 @@ function init() {
       const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
       layers.forEach((l) => { l.x(nx * l.d); l.y(ny * l.d); });
     });
+  }
+
   }
 
   /* ───── generic parallax ───── */
@@ -244,7 +278,7 @@ function init() {
   /* ───── horizontal work scroll ───── */
   const track = $('#track');
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 1px)', () => {
+  if (track) mm.add('(min-width: 1px)', () => {
     const dist = () => Math.max(0, track.scrollWidth - innerWidth);
     const tween = gsap.to(track, {
       x: () => -dist(), ease: 'none',
@@ -294,15 +328,22 @@ function init() {
     });
   });
 
+  /* ───── services index highlight ───── */
+  $$('[data-svc-block]').forEach((blk) =>
+    ScrollTrigger.create({
+      trigger: blk, start: 'top 45%', end: 'bottom 45%',
+      onToggle: (s) => s.isActive && $$('.svc-nav a').forEach((a) => a.classList.toggle('on', a.dataset.svc === blk.dataset.svcBlock)),
+    })
+  );
+
   /* ───── process ───── */
-  gsap.to('#procFill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#procLine', start: 'top 60%', end: 'bottom 70%', scrub: true } });
+  if ($('#procLine')) gsap.to('#procFill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#procLine', start: 'top 60%', end: 'bottom 70%', scrub: true } });
   $$('.step').forEach((s) => ScrollTrigger.create({ trigger: s, start: 'top 62%', toggleClass: { targets: s, className: 'on' } }));
 
   /* ───── big sections ───── */
-  gsap.to('#stats', { scale: 1, ease: 'none', scrollTrigger: { trigger: '#stats', start: 'top bottom', end: 'top 30%', scrub: true } });
-  gsap.fromTo('#stats .stat .n', { yPercent: 30 }, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '#stats', start: 'top bottom', end: 'bottom top', scrub: true } });
+  if ($('#stats')) gsap.fromTo('#stats .stat .n', { yPercent: 30 }, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '#stats', start: 'top bottom', end: 'bottom top', scrub: true } });
   gsap.fromTo('#giantLogo', { yPercent: 40, scale: 0.9, opacity: 0.4 }, { yPercent: 0, scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-  gsap.fromTo('#sprayC', { yPercent: 8 }, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'bottom top', scrub: true } });
+  if ($('#contact')) gsap.fromTo('#contact canvas', { yPercent: 8 }, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '#contact', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   addEventListener('load', () => ScrollTrigger.refresh());
 }

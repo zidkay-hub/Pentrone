@@ -1,58 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
-
-const services = [
-  { n: '01', t: 'Web Development', c: 'c1', p: 'Fast, responsive, secure websites — WordPress and Shopify builds that look sharp and turn visitors into customers.', l: ['Custom WordPress & Shopify', 'UI / UX design', 'E-commerce stores', 'Landing pages that convert', 'Care plans & maintenance'] },
-  { n: '02', t: 'SEO Services', c: 'c2', p: 'We climb you up the rankings and keep you there, so the people searching for you actually find you.', l: ['Technical SEO audits', 'Keyword & competitor research', 'On-page optimisation', 'Link building', 'Local SEO & Google profile'] },
-  { n: '03', t: 'Speed Optimization', c: 'c3', p: 'Every extra second costs sales. We make your pages fly on mobile, desktop and everything between.', l: ['Core Web Vitals fixes', 'Image & code optimisation', 'Caching & CDN setup', 'Database clean-up', 'Hosting tune-up'] },
-  { n: '04', t: 'Digital Marketing', c: 'c4', p: 'Campaigns with a clear goal: turn attention into enquiries, enquiries into customers, customers into fans.', l: ['Google & Meta ads', 'Social media management', 'Email campaigns', 'Conversion tracking', 'Monthly performance reports'] },
-  { n: '05', t: 'Web Security', c: 'c5', p: 'Keep the bad bots out and your customers safe, with proactive protection and a team watching your back.', l: ['Malware scan & clean-up', 'Firewall & SSL', 'Backups & recovery', 'Updates & patching', '24/7 monitoring'] },
-  { n: '06', t: 'Content Marketing', c: 'c6', p: 'Words, visuals and stories your audience actually wants to read, share and act on.', l: ['Content strategy', 'Blog & website copy', 'Social content', 'Visual & video production', 'Brand storytelling'] },
-];
-
-const work = [
-  { img: 'work-hds.webp', t: 'HDS Builders', s: 'Real estate' },
-  { img: 'work-minerva.webp', t: 'Minerva Marketing', s: 'Agency site' },
-  { img: 'work-sanctified.webp', t: 'Sanctified Homes', s: 'Local services' },
-  { img: 'work-vcf.webp', t: 'VCF Corporate Support', s: 'Business services' },
-];
-
-const steps = [
-  { t: 'Discover', p: 'We dig into your business, customers and competitors, then set clear goals and the numbers that prove we hit them.' },
-  { t: 'Design', p: 'Wireframes, brand-led visuals and interactive prototypes. You see and shape the experience before a line of code ships.' },
-  { t: 'Build', p: 'Clean, fast, secure code on WordPress, Shopify or custom stacks, tested on every screen and tuned for search from day one.' },
-  { t: 'Grow', p: 'We launch, then keep going: SEO, ads, content and support that compound month after month.' },
-];
-
-const voices = [
-  { q: 'Pentrone delivered real SEO results — our organic traffic grew month after month, and the new website is genuinely easy for customers to use.', n: 'John Kennedy', r: 'Business owner' },
-  { q: 'The team turned my rough ideas into a functional, attractive site. I keep getting compliments from clients on how it looks.', n: 'Charlotte', r: 'Founder' },
-  { q: 'They understood my vision from the first call and communicated clearly throughout. More traffic, more engagement, zero stress.', n: 'Arthur', r: 'Entrepreneur' },
-];
+import AboutIntro from '../components/AboutIntro.astro';
+import ServicesStack from '../components/ServicesStack.astro';
+import WorkTrack from '../components/WorkTrack.astro';
+import Stats from '../components/Stats.astro';
+import Why from '../components/Why.astro';
+import Process from '../components/Process.astro';
+import Voices from '../components/Voices.astro';
+import FiverrProof from '../components/FiverrProof.astro';
+import Cta from '../components/Cta.astro';
+import { FIVERR } from '../data/site.js';
 ---
-<Base title="Pentrone — Digital agency for websites, SEO & growth" description="Pentrone is a digital agency in Abu Dhabi building fast websites, SEO, digital marketing and security that help brands stand out and grow.">
-  <div class="progress" id="progress"></div>
-  <div class="cursor" id="cursor"></div>
-
-  <!-- NAV -->
-  <header class="nav" id="nav">
-    <nav class="nav-side l">
-      <a class="link" href="#services">Services</a>
-      <a class="link" href="#work">Work</a>
-      <a class="link" href="#process">Process</a>
-    </nav>
-    <a class="brand" href="#top" aria-label="Pentrone home"><img src="/img/logo.png" alt="Pentrone" width="110" height="26" /></a>
-    <nav class="nav-side r">
-      <a class="link" href="#voices">Reviews</a>
-      <a class="btn primary" data-magnetic href="#contact">Get a quote <span class="arr">→</span></a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <!-- HERO -->
+<Base title="Pentrone — Digital agency for websites, apps, SEO & growth" description="Pentrone is a digital agency in Abu Dhabi building websites, mobile apps, SEO, digital marketing and security, and fixing bugs, to help brands stand out and grow." current="home">
     <section class="hero" id="hero">
-      <canvas class="spray spray-a" id="sprayA" aria-hidden="true"></canvas>
-      <canvas class="spray spray-b" id="sprayB" aria-hidden="true"></canvas>
+      <canvas class="spray spray-a" id="sprayA" data-spray="a" aria-hidden="true"></canvas>
+      <canvas class="spray spray-b" id="sprayB" data-spray="b" aria-hidden="true"></canvas>
 
       <h1 id="heroTitle">
         <span class="line"><span>Digital agency <span class="chip" data-chip="1"><svg viewBox="0 0 150 96" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="hc1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22e883"/><stop offset="1" stop-color="#1a8f5c"/></linearGradient></defs><rect width="150" height="96" fill="url(#hc1)"/><rect x="16" y="14" width="118" height="90" rx="9" fill="#fff"/><circle cx="26" cy="24" r="3" fill="#ff5e13"/><circle cx="35" cy="24" r="3" fill="#ffab00"/><circle cx="44" cy="24" r="3" fill="#22e883"/><rect x="26" y="38" width="52" height="8" rx="4" fill="#06201a"/><rect x="26" y="52" width="38" height="8" rx="4" fill="#22e883"/><rect x="26" y="68" width="60" height="4" rx="2" fill="#cfdcd7"/><rect x="26" y="77" width="44" height="4" rx="2" fill="#cfdcd7"/><circle cx="108" cy="58" r="20" fill="#22e883" opacity=".3"/><circle cx="108" cy="58" r="12" fill="#1a8f5c"/></svg></span></span></span>
@@ -61,175 +23,29 @@ const voices = [
       </h1>
 
       <div class="cta" data-hero-in>
-        <a class="btn" data-magnetic href="#work">See our work</a>
-        <a class="btn primary" data-magnetic href="#contact">Start a project <span class="arr">→</span></a>
+        <a class="btn" data-magnetic href="/work/">See our work</a>
+        <a class="btn primary" data-magnetic href="/contact/">Start a project <span class="arr">→</span></a>
       </div>
       <div class="trust" data-hero-in>
         <span class="avs"><img src="/img/avatar-women-44.jpg" alt="" width="34" height="34" /><img src="/img/avatar-men-32.jpg" alt="" width="34" height="34" /><img src="/img/avatar-women-68.jpg" alt="" width="34" height="34" /></span>
-        <span><b>350+</b> happy clients · 120+ projects shipped</span>
+        <span><b>350+</b> happy clients · 120+ projects · <a class="fv-link" href={FIVERR} target="_blank" rel="noopener">on Fiverr ↗</a></span>
       </div>
       <span class="scroll-hint">Scroll</span>
     </section>
 
-    <!-- WORK -->
-    <section class="panel" id="work">
-      <div class="panel-head">
-        <h2 class="rvw" data-words>Brands <span class="ic"><img src="/img/mark-globe.png" alt="" /></span> we<br />work with</h2>
-        <p data-rv>We partner with ambitious businesses to craft bold identities, high-performing websites and growth that shows up in the numbers.</p>
-      </div>
-      <div class="hscroll" id="hscroll">
-        <div class="track" id="track">
-          {work.map((w) => (
-            <a class="wcard" href="#contact">
-              <div class="im"><img src={`/img/${w.img}`} alt={`${w.t} website`} loading="lazy" decoding="async" /></div>
-              <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="#06201a" /></svg></span>
-              <span class="tag">{w.t}<small>{w.s}</small></span>
-            </a>
-          ))}
-          <div class="wcard end">
-            <div>
-              <h3>Your brand <em>next?</em></h3>
-              <span class="btn primary" data-magnetic>Let's talk <span class="arr">→</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <AboutIntro />
+    <ServicesStack />
+    <WorkTrack />
 
-    <!-- MARQUEE -->
     <section class="marquee" aria-hidden="true">
-      <div class="mrow" data-marquee="-1"><span>Websites <i></i></span><span>SEO <i></i></span><span>Marketing <i></i></span><span>Speed <i></i></span><span>Security <i></i></span><span>Content <i></i></span><span>Websites <i></i></span><span>SEO <i></i></span><span>Marketing <i></i></span><span>Speed <i></i></span></div>
+      <div class="mrow" data-marquee="-1"><span>Websites <i></i></span><span>Mobile Apps <i></i></span><span>Bug Fixing <i></i></span><span>SEO <i></i></span><span>Marketing <i></i></span><span>Speed <i></i></span><span>Security <i></i></span><span>Content <i></i></span></div>
       <div class="mrow fill" data-marquee="1"><span>Design that wows <i></i></span><span>Code that flies <i></i></span><span>Growth that lasts <i></i></span><span>Design that wows <i></i></span><span>Code that flies <i></i></span><span>Growth that lasts <i></i></span></div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="services" id="services">
-      <span class="sec-eyebrow" data-rv>What we do</span>
-      <h2 class="sec-title rvw" data-words>Our Services</h2>
-      <div class="stack" id="stack">
-        {services.map((s, i) => (
-          <article class={`scard ${s.c}`} style={`--i:${i}; --r:${i % 2 ? 0.9 : -0.9}deg`}>
-            <div class="num"><b>{s.n}</b>{s.t}</div>
-            <div class="txt"><p>{s.p}</p></div>
-            <ul>{s.l.map((x) => <li>{x}</li>)}</ul>
-            <div class="float" data-speed="0.35" style={`--rot:${i % 2 ? -7 : 7}deg`}>
-              {i === 0 && (<div class="mini"><div class="dots"><i></i><i></i><i></i></div><img src="/img/portf-1.png" alt="" /></div>)}
-              {i === 1 && (<div class="mini"><div class="row top"><span>Your brand</span><b>#1</b></div><div class="row"><span>Competitor A</span><span>#2</span></div><div class="row"><span>Competitor B</span><span>#3</span></div><div class="row"><span>Competitor C</span><span>#4</span></div></div>)}
-              {i === 2 && (<div class="mini"><svg class="gauge" viewBox="0 0 120 80"><path d="M12 70a48 48 0 0 1 96 0" fill="none" stroke="#e1ece7" stroke-width="12" stroke-linecap="round" /><path d="M12 70a48 48 0 0 1 90-23" fill="none" stroke="#22e883" stroke-width="12" stroke-linecap="round" /><text x="60" y="68" text-anchor="middle" font-size="26" font-weight="600" fill="#06201a" font-family="Outfit Variable, sans-serif">98</text></svg></div>)}
-              {i === 3 && (<div class="mini"><div class="bars"><i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:40%"></i><i style="--h:68%"></i><i style="--h:84%"></i><i style="--h:100%"></i></div></div>)}
-              {i === 4 && (<div class="mini" style="background:#0b2e25;border-color:#1c4a3c"><svg class="shield" viewBox="0 0 100 110"><path d="M50 6l38 14v30c0 28-16 46-38 54C28 96 12 78 12 50V20z" fill="#22e883" /><path d="M32 54l13 13 24-26" fill="none" stroke="#06201a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" /></svg></div>)}
-              {i === 5 && (<div class="mini"><img src="/img/portf-6.png" alt="" /><div class="row"><span>New post · 2.4k reads</span><b>↑</b></div></div>)}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <!-- STATS -->
-    <section class="stats" id="stats">
-      <img class="orn" src="/img/mark-globe.png" alt="" data-speed="-0.5" />
-      <h2 class="rvw" data-words>Numbers that make us <em>smile</em> (and our clients too)</h2>
-      <div class="stat-grid">
-        <div class="stat" data-rv><div class="n"><span data-count="120">0</span>+</div><div class="l">Projects completed</div></div>
-        <div class="stat" data-rv><div class="n"><span data-count="350">0</span>+</div><div class="l">Happy clients</div></div>
-        <div class="stat" data-rv><div class="n"><span data-count="10">0</span>+</div><div class="l">Expert professionals</div></div>
-        <div class="stat" data-rv><div class="n"><span data-count="5">0</span>+</div><div class="l">Awards won</div></div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section class="why" id="why">
-      <span class="sec-eyebrow" data-rv>Why Pentrone</span>
-      <h2 class="sec-title rvw" data-words>A team you'll actually<br />enjoy working with</h2>
-      <div class="bento">
-        <article class="bcard b1" data-rv><span class="glow"></span><span class="big">Top</span><h3>Top-notch designers</h3><p>Brand-led, pixel-perfect interfaces that feel like you and convert like crazy.</p></article>
-        <article class="bcard b2" data-rv><span class="glow" style="--g:rgba(34,232,131,.35)"></span><span class="big">24/7</span><h3>Always-on support</h3><p>Something broke at midnight? A real human answers, every day of the week.</p></article>
-        <article class="bcard b3" data-rv><span class="glow" style="--g:rgba(255,94,19,.35)"></span><span class="big">Pro</span><h3>Professional team</h3><p>Developers, SEOs and marketers under one roof, working as one.</p></article>
-        <article class="bcard b4" data-rv><span class="big">A+</span><h3>High-quality delivery</h3><p>Tested, documented and delivered on the date we promised.</p></article>
-        <article class="bcard b5" data-rv><span class="big">∞</span><h3>Built to grow</h3><p>Scalable foundations so your site keeps up as your business takes off.</p></article>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section class="process" id="process">
-      <div class="proc-wrap">
-        <div class="proc-left">
-          <span class="sec-eyebrow" style="text-align:left" data-rv>How we work</span>
-          <h2 class="rvw" data-words>From first call to first place</h2>
-          <p data-rv>A simple, transparent process with no surprises. You always know what is happening and what comes next.</p>
-          <a class="btn dark" data-magnetic href="#contact">Book a free call <span class="arr">→</span></a>
-        </div>
-        <div class="proc-line" id="procLine">
-          <span class="fill" id="procFill"></span>
-          {steps.map((s, i) => (
-            <div class="step">
-              <span class="no" data-speed="0.08">0{i + 1}</span>
-              <h3>{s.t}</h3>
-              <p>{s.p}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- VOICES -->
-    <section class="voices" id="voices">
-      <span class="sec-eyebrow" data-rv>Kind words</span>
-      <h2 class="sec-title rvw" data-words>Clients who grew with us</h2>
-      <div class="vgrid">
-        {voices.map((v, i) => (
-          <figure class="vcard" data-speed={[0.25, -0.2, 0.3][i]}>
-            <div class="stars">★★★★★</div>
-            <span class="q">“</span>
-            <p>{v.q}</p>
-            <figcaption class="who"><i>{v.n[0]}</i><div>{v.n}<span>{v.r}</span></div></figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-sec" id="contact">
-      <canvas id="sprayC" aria-hidden="true"></canvas>
-      <img class="orn" src="/img/mark-globe.png" alt="" data-speed="-0.4" />
-      <div class="cta-grid">
-        <div>
-          <h2 class="rvw" data-words>Ready to <em>stand out?</em></h2>
-          <p class="lead" data-rv>Tell us about your project. You'll get a clear plan, a fair quote and a reply within one working day.</p>
-          <div class="contact-list" data-rv>
-            <a href="mailto:info@pentrone.org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M4 7l8 6 8-6" /></svg>info@pentrone.org</a>
-            <a href="tel:+971543700840"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg>+971 54 370 0840</a>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>Abu Dhabi, United Arab Emirates</span>
-          </div>
-        </div>
-        <form class="form" id="form" data-rv>
-          <h3>Get a free quote</h3>
-          <div class="two">
-            <label>Name<input name="name" required placeholder="Jane Doe" /></label>
-            <label>Email<input name="email" type="email" required placeholder="jane@company.com" /></label>
-          </div>
-          <label>I need help with
-            <select name="service">
-              <option>A new website</option><option>SEO</option><option>Speed optimization</option><option>Digital marketing</option><option>Website security</option><option>Content marketing</option><option>Not sure yet</option>
-            </select>
-          </label>
-          <label>Project details<textarea name="msg" placeholder="Goals, timeline, links…"></textarea></label>
-          <button class="btn dark lg" type="submit" data-magnetic>Send my request <span class="arr">→</span></button>
-          <p class="note">No spam, ever. We reply within one working day.</p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="f-top">
-      <div class="f-logo"><img src="/img/logo.png" alt="Pentrone" /><p>A digital agency building websites, search visibility and marketing that help brands stand out and grow.</p></div>
-      <div><h4>Services</h4><ul><li><a href="#services">Web Development</a></li><li><a href="#services">SEO</a></li><li><a href="#services">Speed Optimization</a></li><li><a href="#services">Digital Marketing</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#work">Work</a></li><li><a href="#process">Process</a></li><li><a href="#voices">Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
-      <div><h4>Say hello</h4><ul><li><a href="mailto:info@pentrone.org">info@pentrone.org</a></li><li><a href="tel:+971543700840">+971 54 370 0840</a></li><li><a href="https://linkedin.com/company/pentrone" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
-    </div>
-    <div class="f-giant"><img src="/img/logo.png" alt="" aria-hidden="true" id="giantLogo" /></div>
-    <div class="f-bottom"><span>© 2026 Pentrone. All rights reserved.</span><span>Abu Dhabi · UAE</span></div>
-  </footer>
+    <Stats />
+    <Why />
+    <Process />
+    <Voices />
+    <FiverrProof />
+    <Cta />
 </Base>
